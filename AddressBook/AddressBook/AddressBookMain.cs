@@ -7,7 +7,7 @@ namespace AddressBook
     public class AddressBookMain
     {
         List<Contact> address = new List<Contact>();
-       
+        Dictionary<string, List<Contact>> addressBook = new Dictionary<string, List<Contact>>();
         public void CreateContact()
         {
             Contact contact = new Contact();
@@ -46,10 +46,8 @@ namespace AddressBook
                         case 3: contact.State = Console.ReadLine(); break;
                         case 4: contact.Zip = Convert.ToInt32(Console.ReadLine()); break;
                         case 5: contact.PhoneNumber = Console.ReadLine(); break;
-
                     }
-                }
-               
+                }               
             }
         }
 
@@ -63,7 +61,6 @@ namespace AddressBook
                     deleteContact = contact; 
                 }
                 address.Remove(deleteContact);
-
             }
         }
 
@@ -82,7 +79,33 @@ namespace AddressBook
                contact.PhoneNumber + "\n" +
                contact.Email);
             }
+        }
 
+        public void CreateDictionaryContact()
+        {
+            Console.WriteLine("Enter name to add Addressbook");
+            string name = Console.ReadLine();
+            addressBook.Add(name, address);
+            address = new List<Contact>();
+        }
+
+        public void DisplayDictionary()
+        {
+            foreach(var data in addressBook)
+            {
+                Console.WriteLine(data.Key);
+                foreach(var contact in data.Value)
+                {
+                    Console.WriteLine(contact.FirstName+"\n"+
+                                      contact.LastName + "\n" +
+                                      contact.Address + "\n" +
+                                      contact.City + "\n" +
+                                      contact.State + "\n" +
+                                      contact.Zip + "\n" +
+                                      contact.PhoneNumber + "\n" +
+                                      contact.Email);
+                }
+            }
         }
     }
 }
